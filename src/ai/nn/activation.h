@@ -15,9 +15,6 @@
 #ifndef AI_NN_ACTIVATION_H_
 #define AI_NN_ACTIVATION_H_
 
-#include <algorithm>
-#include <cmath>
-
 namespace ai::nn::activation {
 
 class activation {
@@ -31,46 +28,30 @@ class activation {
 
 class identity : public activation {
   public:
-    double value(double input) {
-        return input;
-    }
+    double value(double input);
 
-    double derivative(double input) {
-        return 1.0;
-    }
+    double derivative(double input);
 };
 
 class relu : public activation {
   public:
-    double value(double input) {
-        return std::max(0.0, input);
-    }
+    double value(double input);
 
-    double derivative(double input) {
-        return input <= 0.0 ? 0.0 : 1.0;
-    }
+    double derivative(double input);
 };
 
 class sigmoid : public activation {
   public:
-    double value(double input) {
-        return 1.0 / (1.0 + std::exp(-1.0 * input));
-    }
+    double value(double input);
 
-    double derivative(double input) {
-        return this->value(input) * (1.0 - this->value(input));
-    }
+    double derivative(double input);
 };
 
 class tanh : public activation {
   public:
-    double value(double input) {
-        return std::tanh(input);
-    }
+    double value(double input);
 
-    double derivative(double input) {
-        return 1.0 - std::pow(this->value(input), 2.0);
-    }
+    double derivative(double input);
 };
 
 } // namespace ai::nn::activation
